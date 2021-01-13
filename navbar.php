@@ -34,7 +34,28 @@
                                 <li class="dropdown" >
                             <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Hosting<i class="caret"></i></a>
                             <ul class="dropdown-menu" >
-                            <li ><a href="catpage.php?id=24">CMS Hosting</a></li><li ><a href="catpage.php?id=25">WordPress Hosting</a></li><li ><a href="catpage.php?id=26">Mac Hosting</a></li><li ><a href="catpage.php?id=27">windows hosting</a></li><li ><a href="catpage.php?id=40">Linux Hosting</a></li><li ><a href="catpage.php?id=44">Unix1.0</a></li><li ><a href="catpage.php?id=46">bghdfhgfd</a></li><li ><a href="catpage.php?id=47">bvgcb</a></li>                            </ul>			
+						
+							<?php
+							require_once('product.php');
+							
+							 $p=new product();
+							 $y=$p->productcategory();
+							 $n=mysqli_num_rows($y);
+                                
+                                for($i=0;$i<=$n;$i++)
+                                {
+                                $res = $y->fetch_assoc();
+                            ?>
+							
+							<li ><a href="<?php echo $res['page_link']; ?>"><?php echo $res['prod_name']; ?></a></li> 
+							
+							<?php } ;?>
+						 	
+							
+							
+							     
+							
+                            </ul>  			
                         </li>
                         <li><a href="pricing.php">pricing</a></li>
 								<li><a href="contact.php">Contact</a></li>
