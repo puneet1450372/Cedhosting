@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
 </head>
 <?php include 'header.php'?>
-<body class="bg-default">
+<body >
   <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
           <div class="card bg-secondary border-0">
@@ -27,12 +27,13 @@
           
               <div class="text-center">
               <h3>Create product category</h3>
+              <h1 id="data"></h1>
               </div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
               
           <form role="form" id="form_id">
-          <h1 id="data"></h1>
+        
               <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <div class="input-group-prepend">
@@ -54,14 +55,14 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Product page link" type="text" name="page_link" id="page_link">
+                    <textarea name="mytextarea" id="mytextarea">
+  
+                    </textarea    >
+                    <!-- <input class="form-control" placeholder="Product page link" type="text" name="page_link" id="page_link"> -->
                   </div>
                 </div>
                 <div class="form-group">
-               
-                <div id="data1">
-           
-                </div>
+                 
                 </div>
               
                 <div class="row my-4">
@@ -77,44 +78,16 @@
       </div>
     </div>
   </div>
- 
-  <!-- Footer -->
-  <footer class="py-5" id="footer-main">
-    <div class="container">
-      <div class="row align-items-center justify-content-xl-between">
-        <div class="col-xl-6">
-          <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-            <li class="nav-item">
-              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-  <!-- Argon JS -->
-  <script src="../assets/js/argon.js?v=1.2.0"></script>
+  
+
+  <div class="container-fluid">
+  <div class="row">
+  <div class="col-lg-3">
+  </div>
+  <div class="col-lg-8"  id="tableData">
+  </div>
+  </div>
+  </div>
 </body>
 <script>
 
@@ -122,9 +95,14 @@ $(document).ready(function(){
 
 $('#submit').click(function(){
   var prod_name=$('#prod_name').val();
- var page_link= $('#page_link').tinyMCE.activeEditor.getContent();
+
+  
+var page_link = tinymce.get("mytextarea").getContent();
+// var link1 = textarea.replace("<p>","");
+// var link = link1.replace("</p>","");
+
    console.log(prod_name);
-   console.log(page_link);
+  
    
     $.ajax({
       url:'adminhelper.php',
@@ -142,24 +120,40 @@ $('#submit').click(function(){
    
   });
 
+}); 
+  // $.ajax({
+  //     url:'adminhelper.php',
+  //     type:'POST',
+  //     data:{action:'showprodlist' },
   
-  $.ajax({
-      url:'adminhelper.php',
-      type:'POST',
-      data:{action:'showprodlist' },
-  
-      success : function(data){
+  //     success : function(data){
       
-        $('#data1').html(data);
+  //       $('#data1').html(data);
       
   
-      }
+  //     }
   
-    })
+  //   })
+  $(document).ready(function(){
+  showAllCustomer();
+  //View Record
+  function showAllCustomer(){
+    $.ajax({
+      url : "adminhelper.php",
+      type: "POST",
+      data : {action:"showprodlist"},
+      success:function(response){
+          $("#tableData").html(response);
+          $("table").DataTable({
+            order:[0, 'DESC']
+          });
+        }
+      });
+    }
    
   });
 
-
+  
 
 </script>
 

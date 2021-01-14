@@ -207,7 +207,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       $('#getgotp').click(function(){
     var email=$('#email').val();
      
-    // var btn=$('#getmotp').val();
+    var btn=$('#getmotp').val();
    
     $.ajax({
       url:'email.php',
@@ -241,7 +241,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   })
   $('#getmotp').click(function(){
       var mobile=$('#mobile').val();
-      // var btn=$('#getmotp').val();
+      var btn=$('#getmotp').val();
       console.log(mobile);
       $.ajax({
         url:'mob.php',
@@ -303,12 +303,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           {
               alert('password and confirm password must be same');
            }
-          // else if( votm==""){
-          //   alert('please verify the mobile number')
-          // }
-          // else if( votg==""){
-          //   alert('please verify the gmail')
-          // }
+          else if( votm==""){
+            alert('please verify the mobile number')
+          }
+          else if( votg==""){
+            alert('please verify the gmail')
+          }
           else{
               
   

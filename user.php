@@ -19,7 +19,7 @@ class User{
  public function emailsign($email,$name,$mobile ,$date,$password,$security_question,$answer)
     {
   
-    $sql="insert into tb_user (id,email,name,mobile,email_approved ,phone_approved ,active ,is_admin,sign_up_date,password,security_question,security_answer)
+    $sql="insert into tb_user (email,name,mobile,email_approved ,phone_approved ,active ,is_admin,sign_up_date,password,security_question,security_answer)
    values ('$email','$name','$mobile','1','0','1','0','$date','$password','$security_question','$answer')";
    
    $y=$this->conn->query($sql);
@@ -28,11 +28,11 @@ class User{
 }
 public function emaillogin($email,$pass){
   
-   $email_search="select *from tb_user where email='$email'";
+      $email_search="select *from tb_user where email='$email'";
 
-   $query =$this->conn->query($email_search);
-  $email_count = mysqli_num_rows($query);
-  if($email_count){
+         $query =$this->conn->query($email_search);
+   $email_count = mysqli_num_rows($query);
+   if($email_count){
    $email_pass =mysqli_fetch_assoc($query);
    // $status=$email_pass['status'];
    $db_pass =$email_pass['password'];
