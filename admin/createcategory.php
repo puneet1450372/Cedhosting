@@ -78,13 +78,103 @@
       </div>
     </div>
   </div>
-  
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit your category Changes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form role="form" id="form_id">
+        
+        <div class="form-group">
+            <div class="input-group input-group-merge input-group-alternative mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+              </div>
+              <input class="form-control" placeholder="Hosting Name " disabled type="text" >
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-merge input-group-alternative mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+              </div>
+              <input class="form-control" placeholder="Product Name" type="text" name="prod_name" id="prod_name">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-merge input-group-alternative mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+              </div>
+              <textarea name="mytextarea" id="mytextarea">
+
+              </textarea    >
+              <!-- <input class="form-control" placeholder="Product page link" type="text" name="page_link" id="page_link"> -->
+            </div>
+          </div>
+          <div class="form-group">
+           
+          </div>
+        
+          <div class="row my-4">
+           
+          </div>
+          <div class="text-center">
+            <!-- <button type="button" class="btn btn-primary mt-4" id="submit" name="submit">Create account</button> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Button trigger modal -->
+<button >
+ 
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" >Confirmation Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 style="text-align: center;">Are you sure to delete this product </h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div class="container-fluid">
   <div class="row">
   <div class="col-lg-3">
   </div>
-  <div class="col-lg-8"  id="tableData">
+  <div class="col-lg-9"  id="tableData">
   </div>
   </div>
   </div>

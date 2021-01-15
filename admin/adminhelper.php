@@ -31,9 +31,9 @@ $res=$prod->addprodcat($prod_parent_id, $prod_name, $prod_available, $page_link,
 			$output .="<table class='table  table-hover'>
 			        <thead>
 			          <tr>
-			            <th>Id</th>
-			            <th>prod_parent_id</th>
-			            <th>prod_name</th>
+			          
+			            <th>Category Parent Name</th>
+			            <th>Category Name</th>
 			            <th>prod_available</th>
 			            <th>page_link</th>
                         <th>prod_launch_date</th>
@@ -43,18 +43,20 @@ $res=$prod->addprodcat($prod_parent_id, $prod_name, $prod_available, $page_link,
 			        <tbody>";
 			foreach ($customers as $customer) {
 			$output.="<tr>
-			            <td>".$customer['id']."</td>
+			           
 			            <td>".$customer['prod_parent_id']."</td>
-                        <td>".$customer['prod_name']."</td>
+						<td>".$customer['prod_name']."</td>
+				
                         <td>".$customer['prod_available']."</td>
 			            <td>".$customer['page_link']."</td>
 			            <td>".$customer['prod_launch_date']."</td>
 			            <td>
 			              <a href='#editModal' style='color:green' data-toggle='modal' 
                           class='editBtn' id='".$customer['id']."'>
-                          <button type='button' class='btn btn-primary'>Edit</button></a>&nbsp;
-			              <a href='' style='color:red' class='deleteBtn' id='".$customer['id']."'>
-			              <button type='button' class='btn btn-danger'>Delete</button></a>
+                    
+						  <button  type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModalCenter'  id='".$customer['id']."'>edit</button>
+
+			            <button  type='button' class='btn btn-danger deleteBtn' data-toggle='modal' data-target='#exampleModal'  id='".$customer['id']."'>Delete</button>
 			            </td>
 			        </tr>";
 				}
@@ -68,20 +70,7 @@ $res=$prod->addprodcat($prod_parent_id, $prod_name, $prod_available, $page_link,
 
   else  if($action=='addprod')
     {
-    //     echo $productid;
-    //     echo $prod_cat;
-    //     echo $page_url;
-      
-    //     echo $prod_name;
-    //     echo $annual_price;
-    //     echo $mon_price;
-    //     echo $sku;
-    //     echo $webspace;
-    //     echo $bandwidth;
-    //     echo $mail;
-    //     echo $freedomain;
-    //     echo $language;
-     
+    
        $res1=$prod->addnewproduct($productid,$prod_name,$page_url,$mon_price,$annual_price,$sku,$webspace,$bandwidth,$freedomain,$language,$mail);
       
        if($res1){
@@ -93,12 +82,52 @@ else{
     }
 
 
-    
-    if (isset($_POST['showproducts'])) {
+    else  if($action=='viewtable')  
+    {
         $data=$prod->showAddProducts();
-        print_r($data);
+        $d=print_r($data);
       
     }
 
-
+if (isset($_GET['cartdata'])) {
+		$arr['data']=array();
+		if (isset($_SESSION['cartdata'])) { 
+			$cartdata=$_SESSION['cartdata'];
+			for ($i=0;$i<count($cartdata);$i++) {
+				$arr['data'][]=$cartdata[$i];
+			}
+		}
+		echo json_encode($arr);
+	}
+	if (isset($_POST['addtocart'])) {
+		$temp=true;
+		$prodid=$_POST['prodid'];
+		if (!isset($_SESSION['cartdata'])) {
+			$_SESSION['cartdata']=array();
+		}
+		$cartdata=$_SESSION['cartdata'];
+		for ($i=0;$i<count($cartdata);$i++) {
+			if ($cartdata[$i][0]==$prodid) {
+				$_SESSION['cartdata'][$i][4]+=1;
+				$temp=false;
+			}
+		}
+		if ($temp==true) {
+			$data=$product->addToCart($prodid);
+			$_SESSION['cartdata'][]=[$data['prod_id'], $data['prod_name'], $data['mon_price'], $data['sku'], 1, "<a href='javascript:void(0)' data-id=".$data['prod_id']." id='deletecartproduct'><i class='fa fa-trash' aria-hidden='true'></i></a>"];
+		}
+		print_r($_SESSION['cartdata']);
+	}
+	if (isset($_POST['deletecartproduct'])) {
+		$prodid=$_POST['prodid'];
+		$cartdata=$_SESSION['cartdata'];
+		for ($i=0;$i<count($cartdata);$i++) {
+			if ($cartdata[$i][0]==$prodid) {
+				unset($_SESSION['cartdata'][$i]);
+				$_SESSION['cartdata']=array_values($_SESSION['cartdata']);
+				break;
+			}
+		}
+	}
+	
 ?>

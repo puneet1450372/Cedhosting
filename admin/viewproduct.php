@@ -43,7 +43,7 @@
           <div class="card">
             <div class="table-responsive">
               <!-- Projects table -->
-              <table class="table align-items-center table-flush" id="showProduct">
+              <table class="table align-items-center table-flush" id="tabledata">
                 <thead class="thead-light">
                     <tr>
                         <th>Product Parent Name</th>
@@ -289,12 +289,29 @@
 </div>
 <script>
 $(document).ready(function() {
-      showProduct();
+  //View Record
+  var table= $('#tabledata').DataTable( {
+        "ajax": {
+          "url":"adminhelper.php",
+          "dataSrc" :"data",
+           "type": "POST",
+           "data": {"action": 'viewtable'}
+        },
+        "columnDefs": [{
+           "targets": -1,
+            "data": null,
+            "defaultContent": "<button class='btn btn-outline-success' id='editbtn' >Edit</button><button class='btn btn-outline-danger' id='delbtn'>Delete</button>"
+        }]
+
+      });
+   $('#showproduct tbody').on( 'click', '#editbtn', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        alert(data['13']);
+        var id=data['13'];
+        location.replace("editcategoryproduct.php?id="+id);
+
     });
-    function showProduct(){
-          $('#showProduct').DataTable( {
-              "ajax": "adminhelper.php?showproducts="
-          } ); 
-    }
- 
+             })
+
+     
   </script>

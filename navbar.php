@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +48,7 @@
                                 $res = $y->fetch_assoc();
                             ?>
 							
-							<li ><a href="<?php echo $res['page_link']; ?>"><?php echo $res['prod_name']; ?></a></li> 
+							<li ><a href="hosting.php?id=<?php echo $res['id'] ?>"><?php echo $res['prod_name']; ?></a></li> 
 							
 							<?php } ;?>
 						 	
@@ -59,7 +60,7 @@
                         </li>
                         <li><a href="pricing.php">pricing</a></li>
 								<li><a href="contact.php">Contact</a></li>
-								<li><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a> </li>
+								<li><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"><span class="badge badge-light">0</span></i></a> </li>
 
 								<li><a href="login.php">Login</a></li>
 							</ul>

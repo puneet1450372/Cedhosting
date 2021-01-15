@@ -1,9 +1,9 @@
 <?php
 session_start();
-// if (!isset($_SESSION['admin'])) {
-//   header('Location:../login.php');
-// }
-// $actual_link = $_SERVER["PHP_SELF"];
+if (isset($_SESSION['admin'])) {
+  header('Location:../login.php');
+}
+$actual_link = $_SERVER["PHP_SELF"];
 // ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +41,7 @@ session_start();
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
   <!-- custom css -->
-  <link rel="stylesheet" href="../css/customcss.css">
+
   <!-- custom css -->
   <!-- Core -->
   <script src="assets/vendor/jquery/dist/jquery.min.js"></script>

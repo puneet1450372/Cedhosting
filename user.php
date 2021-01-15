@@ -43,11 +43,13 @@ public function emaillogin($email,$pass){
         
       if($db_admin==0){
          echo "<script>user login successful</script>";
+         $_SESSION['user']=$email_pass['name'];
          header('location:index.php');
      
       }
       else if($db_admin==1){
-         echo "<h2 style='color:green'>login successful</h2>";
+         
+         $_SESSION['admin']=$email_pass['name'];
          header('location:admin/index.php');
       }
 

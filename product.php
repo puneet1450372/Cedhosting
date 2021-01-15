@@ -2,7 +2,7 @@
 require_once('config.php');
 class Product extends Database
 {
-   
+   public $action;
     public $conn;
     public function __construct()
     {
@@ -38,6 +38,16 @@ class Product extends Database
 			$data = array();
 			if ($query->num_rows > 0) {
 				while ($row = $query->fetch_assoc()) {
+                    if ($row['prod_available']=='1') {
+                        $row['prod_available']="available";
+                    } else {
+                        $row['prod_available']="unavailable";
+                    }
+                    if($row['prod_parent_id']=='1')
+                    {
+                        $row['prod_parent_id']="Hosting";
+                    }
+                    
 					$data[] = $row;
 				}
 				return $data;
@@ -87,28 +97,153 @@ class Product extends Database
     public function showAddProducts() 
     {
         $sql="SELECT `tbl_product1`.*,`tbl_product_description`.* FROM tbl_product1 JOIN tbl_product_description ON `tbl_product1`.`id` = `tbl_product_description`.`prod_id`";
+        
         $data=$this->conn->query($sql);
         $arr['data']=array();
+        
         while ($row=$data->fetch_assoc()) {
             if ($row['prod_available']=='1') {
                 $available="available";
             } else {
                 $available="unavailable";
             }
-            $decoded_description=json_decode($row['description']);
-            $webspace=$decoded_description->{'webspace'};
-            $bandwidth=$decoded_description->{'bandwidth'};
-            $freedomain=$decoded_description->{'freedomain'};
-            $languagetechnology=$decoded_description->{'language'};
-            $mailbox=$decoded_description->{'mail'};
+            $decoded_desc=json_decode($row['description']);
+            $webspace= $decoded_desc->{'webspace'};
+            $bandwidth= $decoded_desc->{'bandwidth'};
+            $freedomain= $decoded_desc->{'freedomain'};
+            $languagetechnology= $decoded_desc->{'languagetechnology'};
+            $mailbox= $decoded_desc->{'mailbox'};
             $prod_parent_id=$row['prod_parent_id'];
+           
+           
             $sql="SELECT * FROM `tbl_product1` WHERE `id`='$prod_parent_id'";
             $roww=$this->conn->query($sql);
+            
             $data1=$roww->fetch_assoc();
-            $arr['data'][]=array($data1['prod_name'],$row['prod_name'],$row['html'],$available,$row['prod_launch_date'],$row['mon_price'],$row['annual_price'],$row['sku'],$webspace,$bandwidth,$freedomain,$languagetechnology,$mailbox,"<a href='javascript:void(0)' class='btn btn-outline-info' data-id='".$row['prod_id']."' id='edit-product-by-category' data-toggle='modal' data-target='#exampleModalSignUp'>Edit</a> <a href='javascript:void(0)' class='btn btn-outline-danger' data-id='".$row['prod_id']."' id='delete-product-by-category'>Delete</a>");
+            $arr['data'][]=array($data1['prod_name'],$row['prod_name'],$row['page_link'],$available,$row['prod_launch_date'],$row['mon_price'],$row['annual_price'],$row['sku'],$webspace,$bandwidth,$freedomain,$languagetechnology,$mailbox);
         }
-        return json_encode($arr);
+      return json_encode($arr);
     
     }
+    public function getCatPageData($id)
+    {
+        $sql="SELECT `tbl_product1`.*,`tbl_product_description`.* FROM tbl_product1 JOIN tbl_product_description ON `tbl_product1`.`id` = `tbl_product_description`.`prod_id` WHERE `tbl_product1`.`prod_parent_id`='$id'";
+        $data=$this->conn->query($sql);            
+        if ($data->num_rows>0) {
+            $arr=array();
+            while ($row=$data->fetch_assoc()) {
+                if ($row['prod_available']=='0') {
+                    continue;
+                } else {
+                    $available="available";
+                }
+                $decoded_description=json_decode($row['description']);
+                $webspace=$decoded_description->{'webspace'};
+                $bandwidth=$decoded_description->{'bandwidth'};
+                $freedomain=$decoded_description->{'freedomain'};
+                $languagetechnology=$decoded_description->{'languagetechnology'};
+                $mailbox=$decoded_description->{'mailbox'};
+                $arr[]=array(
+                    "prod_id"=>$row['prod_id'],
+                    "sku"=>$row['sku'],
+                    "mon_price"=>$row['mon_price'],
+                    "annual_price"=>$row['annual_price'],
+                    "prod_parent_id"=>$row['prod_parent_id'],
+                    "prod_name"=>$row['prod_name'],
+                    "link"=>$row['page_link'],
+                    "available"=>$available,
+                    "prod_launch_date"=>$row['prod_launch_date'],
+                    "webspace"=>$webspace,
+                    "bandwidth"=>$bandwidth,
+                    "freedomain"=>$freedomain,
+                    "languagetechnology"=>$languagetechnology,
+                    "mailbox"=>$mailbox
+                );
+            }
+            return $arr;
+        }
+        return false;
+    }
+    public function getPageHeading($id) {
+        $sql="SELECT * FROM `tbl_product1` WHERE `id`='$id'";
+        $data=$this->conn->query($sql);
+        if ($data->num_rows>0) {
+            return $data->fetch_assoc();
+        } else {
+            return false;
+        }
+       
+    }
+    public function addToCart($prodid)
+    {
+        $sql="SELECT `tbl_product1`.*,`tbl_product_description`.* FROM tbl_product1 JOIN tbl_product_description ON `tbl_product1`.`id` = `tbl_product_description`.`prod_id` WHERE `tbl_product1`.`id`='$prodid'";
+        $data=$this->conn->query($sql);            
+        if ($data->num_rows>0) {
+            $arr=array();
+            while ($row=$data->fetch_assoc()) {
+                if ($row['prod_available']=='0') {
+                    continue;
+                } else {
+                    $available="available";
+                }
+                $decoded_description=json_decode($row['description']);
+                $webspace=$decoded_description->{'webspace'};
+                $bandwidth=$decoded_description->{'bandwidth'};
+                $freedomain=$decoded_description->{'freedomain'};
+                $languagetechnology=$decoded_description->{'languagetechnology'};
+                $mailbox=$decoded_description->{'mailbox'};
+                $arr=array(
+                    "prod_id"=>$row['prod_id'],
+                    "sku"=>$row['sku'],
+                    "mon_price"=>$row['mon_price'],
+                    "annual_price"=>$row['annual_price'],
+                    "prod_parent_id"=>$row['prod_parent_id'],
+                    "prod_name"=>$row['prod_name'],
+                    "link"=>$row['html'],
+                    "available"=>$available,
+                    "prod_launch_date"=>$row['prod_launch_date'],
+                    "webspace"=>$webspace,
+                    "bandwidth"=>$bandwidth,
+                    "freedomain"=>$freedomain,
+                    "languagetechnology"=>$languagetechnology,
+                    "mailbox"=>$mailbox
+                );
+            }
+            return $arr;
+        }
+        return false;
+    }
 
+    public function ActionwithCategory($id,$action)
+    {
+        {
+            if ($action=='edit') {
+                $sql="SELECT * FROM `tbl_product1` WHERE `id`='$id'";
+                $data=$this->conn->query($sql);
+                if ($data->num_rows>0) {
+                    while ($row=$data->fetch_assoc()) {
+                        return $row;
+                    }
+                }
+                return false;
+            }
+            if ($action=="delete") {
+                $sql="DELETE FROM `tbl_product1` WHERE `id`='$id'";
+                $this->conn->query($sql);
+                $sql="SELECT * FROM `tbl_product1` WHERE `prod_parent_id`='$id'";
+                $data=$this->conn->query($sql);
+                if ($data->num_rows>0) {
+                    while ($row=$data->fetch_assoc()) {
+                        $id=$row['id'];
+                        $sql="DELETE FROM `tbl_product_description` WHERE `prod_id`='$id'";
+                        $this->conn->query($sql);
+                        $sql="DELETE FROM `tbl_product1` WHERE `id`='$id'";
+                        $this->conn->query($sql);
+                    }
+                }
+                return true;
+            }
+        }
+        
+}
 }

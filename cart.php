@@ -22,7 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/modernizr.custom.97074.js"></script>
 <script src="js/jquery.chocolat.js"></script>
 <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 <!--lightboxfiles-->
 <script type="text/javascript">
 	$(function() {
@@ -51,7 +51,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
     <?php include 'navbar.php' ?>
-
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush" id="showProduct">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Monthly Price</th>
+                        <th>SKU</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <a href="javascript:void(0)" id="checkoutbutton">Checkout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+</script>
     <?php include 'footer.php' ?>
 </body>
 </html>
