@@ -1,3 +1,8 @@
+<?php
+
+session_start()
+?>
+
 <?php include 'config.php' ?>
 <?php
 extract($_POST);
@@ -49,7 +54,7 @@ public function emaillogin($email,$pass){
       }
       else if($db_admin==1){
          
-         $_SESSION['admin']=$email_pass['name'];
+         $_SESSION['user']=$email_pass['name'];
          header('location:admin/index.php');
       }
 

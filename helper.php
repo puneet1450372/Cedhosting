@@ -1,6 +1,7 @@
 <?php include 'user.php' ?>
 <?php
 
+session_start();
 extract($_POST);
 $insert=new User();
 $pass=password_hash($password,PASSWORD_BCRYPT);

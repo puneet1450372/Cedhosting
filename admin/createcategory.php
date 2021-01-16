@@ -203,7 +203,7 @@ var page_link = tinymce.get("mytextarea").getContent();
       
         $('#data').html(data);
       
-  
+        location.reload();
       }
   
     })

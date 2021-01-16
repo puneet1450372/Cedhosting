@@ -1,4 +1,6 @@
-
+<?php
+// session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +64,15 @@
 								<li><a href="contact.php">Contact</a></li>
 								<li><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"><span class="badge badge-light">0</span></i></a> </li>
 
-								<li><a href="login.php">Login</a></li>
+							 <?php
+						if (!isset($_SESSION['user'])) {
+							echo '<li><a href="logout.php">Logout</a></li>';
+						}
+						else {
+							
+							echo '<li ><a href="login.php">Login</a></li>';
+						}
+						?>
 							</ul>
 							<ul>
 

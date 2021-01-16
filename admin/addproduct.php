@@ -250,6 +250,7 @@ debugger;
         data:{action:'addprod',productid:productid,prod_cat:prod_cat,prod_name:prod_name,page_url:page_url, mon_price: mon_price,annual_price:annual_price,sku:sku,webspace:webspace,bandwidth:bandwidth,freedomain:freedomain,language:language,mail:mail},
         success:function(data){
           $('#result').html(data);
+          location.reload();
         }
       })
 

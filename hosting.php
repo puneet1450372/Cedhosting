@@ -128,8 +128,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <li><strong>location</strong> : <img src="images/india.png"></li>
                                         </ul>
                                     </div>
-                                    <a href="javascript:void(0)" data-id='.$datacon[$i]["prod_id"].' id="addtocart">buy now</a>
-                                </div>';
+                                    <a href="javascript:void(0)" id="addtocart" data-toggle="modal" data-target="#exampleModal" data-id='.$datacon[$i]["prod_id"].' >buy now</a>
+                               
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Choose your Plan</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                       
+                                         <select style="text-align: center; width:100%; height:40px;" id="plan">
+                                         <!-- <option value="select"><-----------------Select-------------></option> -->
+                                         <option value='.$datacon[$i]['mon_price'].'>Monthly plan</option>
+                                         <option value=' .$datacon[$i]['annual_price']. '>Annualy plan</option>
+                                         
+                                         </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="button" class="btn btn-primary" id="ok">Ok</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    </div>';
                             }
                             print_r($html);
                             ?>
@@ -140,6 +166,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
     <!-- clients -->
 <div class="clients">
     <div class="container">
@@ -226,25 +257,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
+    <div id="result"></div>
     <script>
         $('#myTab').on('click','#addtocart',function(){
             var prod_id=$(this).data('id');
-            alert(prod_id);
+        
             $.ajax({
                 url: 'admin/adminhelper.php',
                 method: 'post',
                 data: {
-                    prodid: prod_id,
-                    addtocart: true
+                    action:'addtocart',
+                    prod_id: prod_id,
+                    
                 },
                 success: function(msg){
-                    $(location).attr('href','cart.php');
-                },
+                 
+                    $('#result').html(msg);     },
                 error: function(){
                     alert("error in fetching product");
                 }
             });
         });
+       $('#ok').click(function(){
+$(location).attr('href','cart.php');
+       })
+            // });
+        // })
+        
     </script>
 
 </div>

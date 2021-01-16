@@ -199,7 +199,7 @@ class Product extends Database
                     "annual_price"=>$row['annual_price'],
                     "prod_parent_id"=>$row['prod_parent_id'],
                     "prod_name"=>$row['prod_name'],
-                    "link"=>$row['html'],
+                    "link"=>$row['page_link'],
                     "available"=>$available,
                     "prod_launch_date"=>$row['prod_launch_date'],
                     "webspace"=>$webspace,
@@ -209,7 +209,7 @@ class Product extends Database
                     "mailbox"=>$mailbox
                 );
             }
-            return $arr;
+            return ($arr);
         }
         return false;
     }
