@@ -91,13 +91,23 @@
 								</div>
 							</div>
 							<div class="col-md-3 footer-grid">
-								<h4>get in touch</h4>
-								<p>8901 Marmora Road</p>
-								<p>Glasgow, DO4 89GR.</p>
-								<p>Telephone : +1 234 567 890</p>
-								<p>Telephone : +1 234 567 890</p>
-								<p>FAX : + 1 234 567 890</p>
-								<p>E-mail : <a href="mailto:example@mail.com"> example@mail.com</a></p>
+								<p id="result">
+							<?php	
+							require_once('product.php');
+							$obj=new Product();
+							$address=$obj->companyaddress();
+
+							echo "company name".($address['comp_name'])."<br>" ;
+							echo "company contact".($address['comp_contact'])."<br>" ;
+							echo " email".($address['comp_email'])."<br>" ;
+							echo "company address".($address['comp_address'])."<br>";
+							echo "compnay state".($address['comp_state'])."<br>" ;
+							echo "company city".($address['comp_city'])."<br>" ;
+							echo "company pincode".($address['comp_pincode'])."<br>" ;
+							
+
+?>
+								</p>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -106,5 +116,6 @@
 						</div>
 					</div>
 				</div>
+				
 </body>
 </html>

@@ -1,6 +1,4 @@
-<?php
-// session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,17 +60,47 @@
                         </li>
                         <li><a href="pricing.php">pricing</a></li>
 								<li><a href="contact.php">Contact</a></li>
-								<li><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"><span class="badge badge-light">0</span></i></a> </li>
+								<li><a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"><span class="badge badge-light">
+								<?php
+								
+							if (isset($_SESSION['user'])) 
+							{	
+								if(!isset($_SESSION['cartdata']))
+								{
+									echo "0";
+								}
+								else{
+									echo count($_SESSION['cartdata']);
+								}
+								
+							}
+							else{
+								echo "0";
+							}
+								
+								?>
+								</span></i></a> </li>
 
 							 <?php
-						if (!isset($_SESSION['user'])) {
-							echo '<li><a href="logout.php">Logout</a></li>';
-						}
-						else {
+						// if (!isset($_SESSION['user'])) {
 							
-							echo '<li ><a href="login.php">Login</a></li>';
-						}
-						?>
+						// 	echo '<li ><a href="login.php">Login</a></li>';
+						// }
+						
+						// else {
+							
+						// 	echo '<li><a href="logout.php">Logout</a></li>';
+						// }
+						
+    if(!isset($_SESSION['user']) ) {
+		echo '<li ><a href="login.php">Login</a></li>';
+        // header('Location: /index.php');
+    } else if(isset($_SESSION['user']) ){
+		echo '<li><a href="logout.php">Logout</a></li>';
+        // header('Location: /login.php');
+    }
+?>
+						<!-- ?> -->
 							</ul>
 							<ul>
 

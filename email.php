@@ -16,12 +16,12 @@ if($data == "on"){
       $mail->isSMTP();                                             
       $mail->Host       = 'smtp.gmail.com;';                     
       $mail->SMTPAuth   = true;                              
-      $mail->Username   = 'yadavpuneet766@gmail.com';                  
-      $mail->Password   = 'puneetyadav';                         
+      $mail->Username   = 'puneetcarrers@gmail.com';                  
+      $mail->Password   = 'puneet@1450';                         
       $mail->SMTPSecure = 'tls';                               
       $mail->Port       = 587;   
     
-      $mail->setFrom('yadavpuneet766@gmail.com', 'puneetyadav');            
+      $mail->setFrom('puneetcarrers@gmail.com', 'puneet@1450');            
       $mail->addAddress($_POST['email']); 
      
          

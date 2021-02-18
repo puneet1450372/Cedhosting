@@ -246,4 +246,36 @@ class Product extends Database
         }
         
 }
+
+public function companyaddress(){
+
+    $sql="select  *from tbl_company_info";
+    $data=$this->conn->query($sql);   
+
+   $num=mysqli_num_rows($data);
+
+   $asarray=mysqli_fetch_assoc($data);
+   return $asarray;
+}
+
+public function states()
+{
+    $sql="select * from  tbl_state";
+    $data=$this->conn->query($sql);
+
+ 
+    
+
+    return $data;
+  
+}
+
+public function billingadd($user_id,$billing_name,$address,$city,$state,$country,$pincode)
+{
+    $sql="insert into tbl_user_billing_add(user_id,billing_name,address,city,state,country,pincode) values('$user_id','$billing_name','$address','$city','$state','$country','$pincode')";
+    $data=$this->conn->query($sql);
+
+    return $data;
+}
+
 }

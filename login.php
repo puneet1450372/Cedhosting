@@ -1,4 +1,5 @@
 <?php include 'user.php' ?>
+<?php include 'navbar.php' ?>
 <?php
 if(isset($_POST['submit'])){
 	$email=$_POST['email'];
@@ -42,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 	<!---header--->
-	<?php include 'navbar.php' ?>
+	
 	<!---header--->
 		<!---login--->
 			<div class="content">

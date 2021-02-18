@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section>
      
     <form  style="text-align:center">
-    <h3 style="color:red" id="result"></h3>
+    <h3 style="color:green" id="result"></h3>
     
         <h1>Personal Information</h1>
        
@@ -281,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
      var cpassword=$('#cpassword').val();
      var answer=$('#answer').val();
      var security_question=$('#security_question').val();
-  //    $_SESSION["favcolor"] = "yellow";
+  
   
      
           if(name==""){
@@ -311,12 +311,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           }
           else{
               
-  
+  debugger;
           $.ajax({
               url:'helper.php',
               type:"POST",
               data:{
-                  'action':email,
+                  action:'email',
                   'name':name,
                   'email':email,
                   'mobile':mobile,
@@ -326,7 +326,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                  
               },
               success: function(data){
-                 $('#result').html(data);
+                alert(data);
+                window.reload();
+               
               }
           });
           } 

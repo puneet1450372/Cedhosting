@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <tr>
                         <th>Product ID</th>
                         <th>Product Name</th>
-                        <th>Monthly Price/Annual price</th>
+                        <th>Monthly Price</th>
                        
                         <th>SKU</th>
                         <th>Quantity</th>
@@ -88,11 +89,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </thead>
                 </table>
             </div>
-            <a href="javascript:void(0)" id="checkoutbutton">Checkout</a>
+            <?php
+
+
+
+
+?>
+           <button  class="btn btn-primary" > <a href="checkout.php" id="checkoutbutton" style="color:white" >Checkout</a></button>
             </div>
         </div>
     </div>
 </div>
+
 <script>
 $(document).ready(function() {
   //View Record

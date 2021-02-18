@@ -1,7 +1,4 @@
-<?php
 
-session_start()
-?>
 
 <?php include 'config.php' ?>
 <?php
@@ -49,12 +46,13 @@ public function emaillogin($email,$pass){
       if($db_admin==0){
          echo "<script>user login successful</script>";
          $_SESSION['user']=$email_pass['name'];
+         $_SESSION['id']=$email_pass['id'];
          header('location:index.php');
      
       }
       else if($db_admin==1){
-         
          $_SESSION['user']=$email_pass['name'];
+         $_SESSION['id']=$email_pass['id'];
          header('location:admin/index.php');
       }
 

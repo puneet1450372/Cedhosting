@@ -112,6 +112,7 @@ if ($action == "cart") {
 	}
 	echo json_encode($arr);
 }
+
 if ($action == "deletecart") {
 	$prodid = $_POST['prod_id'];
 	$cartdata = $_SESSION['cartdata'];
@@ -123,5 +124,9 @@ if ($action == "deletecart") {
 			break;
 		}
 	}
+if ($action=="address")
+{
+	
+}
 }
 ?>
